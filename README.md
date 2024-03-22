@@ -223,8 +223,10 @@ fi
 set -x
 
 # Stop display manager
-systemctl stop display-manager
 # systemctl --user -M YOUR_USERNAME@ stop plasma*
+sudo -u YOUR_USERNAME DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/YOUR_USER_ID/bus systemctl --user -M YOUR_USERNAME@ stop plasma*
+# The above, for plasma wayland. Avoids "Failed to connect to bus: No medium found" Find YOUR_USER_ID by executing 'id -u'
+systemctl stop display-manager
 
 # Unbind VTconsoles: might not be needed
 echo 0 > /sys/class/vtconsole/vtcon0/bind
