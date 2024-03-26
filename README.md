@@ -224,7 +224,11 @@ set -x
 
 # Stop display manager
 # systemctl --user -M YOUR_USERNAME@ stop plasma*
-sudo -u YOUR_USERNAME DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/YOUR_USER_ID/bus systemctl --user -M YOUR_USERNAME@ stop plasma*
+if [ "$session_type" != "x11" ]; then
+  sudo -u YOUR_USERNAME DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/YOUR_USER_ID/bus systemctl --user -M YOUR_USERNAME@ stop plasma*
+else
+  echo "X, don't run this"
+fi
 # The above, for plasma wayland. Avoids "Failed to connect to bus: No medium found" Find YOUR_USER_ID by executing 'id -u'
 systemctl stop display-manager
 
