@@ -224,7 +224,7 @@ set -x
 
 # Stop display manager
 # systemctl --user -M YOUR_USERNAME@ stop plasma*
-if [ "$session_type" != "x11" ]; then
+if [ "$XDG_SESSION_TYPE" != "x11" ]; then
   sudo -u YOUR_USERNAME DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/YOUR_USER_ID/bus systemctl --user -M YOUR_USERNAME@ stop plasma*
 else
   echo "X, don't run this"
